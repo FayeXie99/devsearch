@@ -3,20 +3,46 @@
     <div class="pagination">
       <ul class="container">
         {% if queryset.has_previous %}
-        <li><a href="?page={{queryset.previous_page_number}}" class="btn page-link btn--sub">&#10094; </a></li>
+        <li><a href="?page={{queryset.previous_page_number}}" class="btn page-link btn--sub" data-page="{{queryset.previous_page_number}}">&#10094; </a></li>
         {% endif %}
         <!-- paginator.page_range -->
         {% for page in custom_range %}
           {% if page == queryset.number %}
-            <li><a href="?page={{page}}" class="btn page-link btn--sub">{{page}}</a></li>
+            <li><a href="?page={{page}}" class="btn page-link btn--sub" data-page="{{page}}">{{page}}</a></li>
           {% else %}
-            <li><a href="?page={{page}}" class="btn page-link">{{page}}</a></li>
+            <li><a href="?page={{page}}" class="btn page-link" data-page="{{page}}">{{page}}</a></li>
           {% endif %}
         {% endfor %}
 
         {% if queryset.has_next %}
-        <li><a href="?page={{queryset.next_page_number}}" class="btn page-link btn--sub"> &#10095;</a></li>
+        <li><a href="?page={{queryset.next_page_number}}" class="btn page-link btn--sub" data-page="{{queryset.next_page_number}}"> &#10095;</a></li>
         {% endif %}
       </ul>
     </div>
     {% endif %}
+
+    <script type="text/javascript">
+      //get search form and page link
+      let searchForm = document.getElementById('searchForm')
+      let pageLinks = document.getElementsByClassName("page-link")
+
+      //ensure search form exists
+      if (searchForm){
+        for(let i=0; pageLinks.length > i; i++){
+          pageLinks[i].addEventListener('click',function (e) {
+            e.preventDefault()
+            //console.log('Button click')
+            // get the data attribute
+            let page = this.dataset.page
+            //console.log('PAGE',page)
+            //add hidden search input to form
+            searchForm.innerHTML+=`<input value=${page} name='page' hidden/>`
+            //submit
+            searchForm.submit()
+          })
+        }
+
+      }
+
+
+    </script>
