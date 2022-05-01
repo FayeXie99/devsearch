@@ -4,24 +4,32 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Project,Tag
-from .form import ProjectForm
+from .form import ProjectForm,ReviewForm
 
 from .utils import searchProjects,paginateProjects
-
+from django.contrib import messages
 
 def projects(request):
     projects,search_query = searchProjects(request)
     custom_range,projects = paginateProjects(request,projects,6)
-
-
-
-
     context = {'projects':projects,'search_query':search_query,'custom_range':custom_range}
     return render(request,'projects/projects.html',context)
 
 def project(request,pk):
     projectObj = Project.objects.get(id=pk)
-    return render(request,'projects/single-project.html',{'projectObj':projectObj})
+    form = ReviewForm
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        review=form.save(commit=False)
+        review.project = projectObj
+        review.owner = request.user.profile
+        review.save()
+        projectObj.getVoteCount
+        messages.success(request,'Your review was submitted!')
+        return redirect('project',pk=projectObj.id)
+
+
+    return render(request,'projects/single-project.html',{'projectObj':projectObj,'form':form})
     #return HttpResponse("Single project"+" "+str(pk))
 
 @login_required(login_url="login")
