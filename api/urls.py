@@ -10,6 +10,8 @@ urlpatterns = [
     path('users/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path("",views.getRoutes),
     path("projects/",views.getProjects),
-    path("project/<str:pk>/",views.getProject)
+    path("project/<str:pk>/",views.getProject),
+    path("project/<str:pk>/vote/",views.projectVote),
+    
 
 ]
