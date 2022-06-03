@@ -18,7 +18,7 @@ def getRoutes(request):
     return Response(routes)
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def getProjects(request):
     print("USER:",request.user)
     projects=Project.objects.all()
@@ -47,6 +47,6 @@ def projectVote(request,pk):
     review.value = data['value']
     review.save()
     project.getVoteCount
-    
+
     serializer=ProjectSerializer(project,many=False)
     return Response(serializer.data)
