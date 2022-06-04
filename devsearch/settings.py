@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-c^pad2*v72r5%)2)7(oh$9jr7tmjweukp(ll4t%0d9qy8i*yce
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['localhost','127.0.0.1']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','https://devsearch-share-projects.herokuapp.com']
 
 
 
@@ -206,3 +206,6 @@ AWS_ACCESS_KEY_ID = 'AKIARE72MN7A2JKSY5V3'
 AWS_SECRET_ACCESS_KEY = "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"
 AWS_STORAGE_BUCKET_NAME = 'devsearch-bucket002'
 AWS_QUERYSTRING_AUTH = False
+
+if os.getcwd() == '/app':
+    DEBUG=False
