@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-c^pad2*v72r5%)2)7(oh$9jr7tmjweukp(ll4t%0d9qy8i*yce
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ['localhost','127.0.0.1','https://devsearch-share-projects.herokuapp.com','https://devsearch-shareprojects.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','https://devsearch-share-projects.herokuapp.com','https://devsearch-shareprojects.herokuapp.com','.herokuapp.com']
 
 
 
